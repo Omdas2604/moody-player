@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
 import "./FacialExpression.css"
+import axios from 'axios';
 
-export default function FacialExpression() {
+export default function FacialExpression({setSongs}) {
   const videoRef = useRef();
-  const canvasRef = useRef();
-
   const loadModels = async () => {
     const MODEL_URL = "/models";
     await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
@@ -42,9 +41,19 @@ async function detectMood() {
     }
   }
   console.log(_expression);
+
+  axios.get(`http://localhost:3000/songs?mood=${_expression}`)
+  .then(response=>{
+    console.log(response.data);
+    setSongs(response.data.songs);
+    
+  })
+
 }
 
+useEffect(()=>{
   loadModels().then(startVideo);
+},[])
 
   return (
     <div className="mood-element">
