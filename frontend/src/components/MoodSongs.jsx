@@ -12,19 +12,42 @@ const MoodSongs = ({ songs, mood }) => {
     }
   };
 
-  // Mood → Heading text
-  const moodHeadings = {
-    happy: "You seem happy 😊",
-    sad: "You seem sad 😢",
-    angry: "You seem angry 😡",
-    surprised: "You seem surprised 😮",
-    neutral: "You seem neutral 🙂",
-  };
+ const moodHeadings = {
+  happy: (
+    <>
+      You seem happy 😊 <br />
+      Here are some songs recommended for you
+    </>
+  ),
+  sad: (
+    <>
+      You seem sad 😢 <br />
+      Here are some songs recommended for you
+    </>
+  ),
+  angry: (
+    <>
+      You seem angry 😡 <br />
+      Here are some songs recommended for you
+    </>
+  ),
+  surprised: (
+    <>
+      You seem surprised 😮 <br />
+      Here are some songs recommended for you
+    </>
+  ),
+  neutral: (
+    <>
+      You seem neutral 🙂 <br />
+      Here are some songs recommended for you
+    </>
+  ),
+};
 
-  let heading = "No songs to show at the moment";
-  if (mood) {
-    heading = moodHeadings[mood] || `You seem ${mood}`;
-  }
+let heading = mood ? moodHeadings[mood] : "No songs to show at the moment";
+
+
 
   return (
     <div className="mood-songs-container">
